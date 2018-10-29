@@ -1,7 +1,7 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Custom/01_FragWorldPos/FragWorldPos" {
+Shader "Collection/01_FragWorldPos/FragWorldPos" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 	}
