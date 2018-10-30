@@ -54,9 +54,9 @@ Shader "Collection/01_FragWorldPos/FragWorldPosImg_01" {
 			// Divide by w to get the world position. 
 			float4 worldPos = D / D.w;
 			
-			fixed hasObj = d > 0.999f ? 0 : 1.0f;
-//			return H * 0.5 + 1;
-			//return fixed4(d,d,d,1);
+			//fixed hasObj = d > 0.999f ? 0 : 1.0f;
+			fixed hasObj = step(d,0.999f);
+
 			return fixed4(worldPos.rgb, 1.0) * hasObj;
 		}
 		

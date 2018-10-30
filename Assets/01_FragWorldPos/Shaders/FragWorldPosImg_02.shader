@@ -8,7 +8,8 @@ Shader "Collection/01_FragWorldPos/FragWorldPosImg_02" {
 		CGINCLUDE
 		
 		#include "UnityCG.cginc"
-		
+
+		#pragma multi_compile __ _CAM_ORTHO
 		
 		sampler2D _MainTex;
 		half4 _MainTex_TexelSize;
@@ -21,6 +22,11 @@ Shader "Collection/01_FragWorldPos/FragWorldPosImg_02" {
 			half2 uv : TEXCOORD0;
 			half2 uv_depth : TEXCOORD1;
 			float4 interpolatedRay : TEXCOORD2;
+
+			#ifdef _CAM_ORTHO
+			float3 camForward: TEXCOORD3;
+			#endif
+
 		};
 		
 		v2f vert(appdata_img v) {
@@ -52,7 +58,11 @@ Shader "Collection/01_FragWorldPos/FragWorldPosImg_02" {
 			#endif
 			
 			o.interpolatedRay = _FrustumCornersRay[index];
-				 	 
+
+			#ifdef _CAM_ORTHO
+			o.camForward = float3(_FrustumCornersRay[0][3],_FrustumCornersRay[1][3],_FrustumCornersRay[2][3]); 
+			#endif
+
 			return o;
 		}
 		
@@ -64,9 +74,14 @@ Shader "Collection/01_FragWorldPos/FragWorldPosImg_02" {
 			#endif
 
 			float linearDepth = LinearEyeDepth(d);
+#ifdef _CAM_ORTHO
+			float3 worldPos = _WorldSpaceCameraPos + i.camForward * linearDepth + i.interpolatedRay.xyz;
+#else
 			float3 worldPos = _WorldSpaceCameraPos + linearDepth * i.interpolatedRay.xyz;
-						
-			fixed hasObj = d > 0.999f ? 0 : 1.0f;
+#endif
+									
+			//fixed hasObj = d > 0.999f ? 0 : 1.0f;
+			fixed hasObj = step(d,0.999f);
 
 			return fixed4(worldPos.xyz,1.0) * hasObj;
 		}
