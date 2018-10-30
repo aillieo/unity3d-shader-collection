@@ -57,10 +57,18 @@ Shader "Collection/01_FragWorldPos/FragWorldPosImg_02" {
 		}
 		
 		fixed4 frag(v2f i) : SV_Target {
-			float linearDepth = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv_depth));
+
+			float d = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv_depth);
+			#if UNITY_REVERSED_Z
+				d = 1.0f - d;
+			#endif
+
+			float linearDepth = LinearEyeDepth(d);
 			float3 worldPos = _WorldSpaceCameraPos + linearDepth * i.interpolatedRay.xyz;
 						
-			return fixed4(worldPos.xyz,1.0);
+			fixed hasObj = d > 0.999f ? 0 : 1.0f;
+
+			return fixed4(worldPos.xyz,1.0) * hasObj;
 		}
 		
 		ENDCG

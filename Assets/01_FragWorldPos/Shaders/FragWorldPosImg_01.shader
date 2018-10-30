@@ -39,7 +39,10 @@ Shader "Collection/01_FragWorldPos/FragWorldPosImg_01" {
 			
 			// Get the depth buffer value at this pixel.
 			float d = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv_depth);
-			
+			#if UNITY_REVERSED_Z
+				d = 1.0f - d;
+			#endif
+
 			// H is the viewport position at this pixel in the range -1 to 1.
 			float4 H = float4(i.uv.x * 2 - 1, i.uv.y * 2 - 1, d * 2 - 1, 1);
 			// 这里的H是NDC坐标系下的坐标 x y z都是 [-1,1]的范围
@@ -51,8 +54,7 @@ Shader "Collection/01_FragWorldPos/FragWorldPosImg_01" {
 			// Divide by w to get the world position. 
 			float4 worldPos = D / D.w;
 			
-			fixed hasObj = d < 0.001f ? 0 : 1.0f;
-
+			fixed hasObj = d > 0.999f ? 0 : 1.0f;
 //			return H * 0.5 + 1;
 			//return fixed4(d,d,d,1);
 			return fixed4(worldPos.rgb, 1.0) * hasObj;
