@@ -37,7 +37,7 @@ touch $mainfile
 echo reset $rmname
 
 # 逆序遍历保存的文件夹 提取REAMME.md
-for(( i=$filecnt;i>=0;i--)) do
+for(( i=$filecnt-1;i>=0;i--)) do
 	folder=${folders[i]}
 	filename=$folderoot/$folder/$rmname
 	echo processing ... $filename
