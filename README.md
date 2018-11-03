@@ -1,3 +1,9 @@
+## 02_ShowVerts
+
+借助几何着色器，在绘制时只显示顶点。
+
+![show_verts.png](GALLERY/02_ShowVerts/show_verts.png)
+***
 ## 01_FragWorldPos
 
 在片段着色器中获取世界坐标，并将坐标作为颜色输出。后处理阶段根据深度纹理解算出来像素对应的世界坐标，可用于做边界检测、运动模糊等效果。
