@@ -23,6 +23,12 @@
 		//起始角度和持续的角度
 		_AngleStart("AngleStart",Float) = 0
 		_AngleRange("AngleRange", Range(1,179)) = 60
+
+
+		//内侧透明度
+		_InnerAlpha("InnerAlpha",Range(0,1)) = 0.5
+		//外线框厚度
+		_EdgeThickness("EdgeThickness",Range(0,0.5)) = 0.1
 		
 	}     
      
@@ -70,8 +76,9 @@
             {     
                 float4 vertex   : SV_POSITION;     
                 fixed4 color    : COLOR;     
-                half2 texcoord  : TEXCOORD0;     
-            };     
+                half2 texcoord  : TEXCOORD0;
+				half  edge      : TEXCOORD1;	// 存储到edge的距离
+            };
                
             sampler2D _MainTex;
 			sampler2D _AlphaTex;
@@ -88,6 +95,7 @@
             {
 
 				float AngleEnd = _AngleStart + _AngleRange;
+				half edge = 0.0;
 				
 				if(IN.texcoord.x > 0.5f && IN.texcoord.y < 0.5f)
 				{
@@ -122,6 +130,12 @@
 					// 右上是中点
 					IN.vertex.xy = 0.5f * (lt + rb);
 				}
+				else
+				{
+					// 只剩左下角了
+					// 求点到对边距离的话 计算量略大 就近似处理了
+					edge = _ValueStart * _ValueEnd;
+				}
 
 
                 v2f OUT;     
@@ -131,10 +145,16 @@
                 OUT.vertex.xy -= (_ScreenParams.zw-1.0);     
 #endif     
 
-                OUT.color = /*IN.color */ _Color;     
+                OUT.color = IN.color * _Color;     
+				OUT.edge = edge;
                 return OUT;  
             }  
      
+
+
+
+			float _InnerAlpha;
+			float _EdgeThickness;
 
             fixed4 frag(v2f IN) : SV_Target     
             {     
@@ -145,7 +165,10 @@
 						
 				fixed3 finalColor = renderTex * IN.color;
 
-				return fixed4(finalColor, alphaTex.r * renderTex.a);
+				// float smoothstep(float start, float end, float parameter)
+				half alpha = _InnerAlpha + (1 - _InnerAlpha) * smoothstep( 1.0 - _EdgeThickness, 1.0, 1.0 - IN.edge);
+
+				return fixed4(finalColor, alpha * alphaTex.r * renderTex.a);
 
             }     
             ENDCG     
