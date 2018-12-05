@@ -1,3 +1,9 @@
+## 04_ModelAlphaBlend
+
+在模型中使用AlphaBlend，三个半透明的shader，从左到右依次是绘制双面、带深度绘制、使用Fresnel效果。
+
+![Long](GALLERY/04_ModelAlphaBlend/Long.gif)
+***
 ## 03_RadarImage
 
 基于shader在UGUI中绘制雷达图。在vert中修改Image的顶点，并根据位置在frag中计算片段透明度。使用脚本驱动雷达图动画。
