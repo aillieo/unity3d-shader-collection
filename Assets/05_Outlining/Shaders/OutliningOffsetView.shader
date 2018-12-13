@@ -1,6 +1,4 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-Shader "Collection/05_Outlining/OutliningScale" {
+﻿Shader "Collection/05_Outlining/OutliningOffsetView" {
     Properties{
         _MainTex("Base (RGB)", 2D) = "white" {}
         _OutlineColor("Outline Color", Color) = (1,1,1,1)
@@ -70,18 +68,11 @@ Shader "Collection/05_Outlining/OutliningScale" {
             v2f vert(appdata_t v)
 		    {
 		        v2f o = (v2f)0;
-
-				half s = 1 + _OutlineWidth;
-		        half4x4 scale = half4x4(
-					s,	0,	0,	0,
-					0,	s,	0,	0,
-					0,	0,	s,	0,
-					0,	0,	0,	1
-		        );
-
-		        float4 vertex = mul(scale, v.vertex);
-		        float4 worldPos = UnityObjectToClipPos(vertex);
-		        o.vertex = worldPos;
+				float4 viewPos = mul(UNITY_MATRIX_MV, v.vertex);
+				float3 viewNorm = mul((float3x3)UNITY_MATRIX_IT_MV, v.normal);  
+				float3 offset = normalize(viewNorm) * _OutlineWidth;
+				viewPos.xyz += offset;
+				o.vertex = mul(UNITY_MATRIX_P, viewPos);
 		        return o;
 		    }
             fixed4 frag(v2f i) :SV_Target

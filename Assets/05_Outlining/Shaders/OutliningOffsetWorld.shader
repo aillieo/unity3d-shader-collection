@@ -43,7 +43,7 @@
             #pragma fragment frag
             v2f vert(appdata_t v)
 		    {
-		        v2f o;
+		        v2f o = (v2f)0;
 		        o.vertex = UnityObjectToClipPos(v.vertex);
 		        o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
 		        return o;
@@ -67,7 +67,7 @@
             #pragma fragment frag
             v2f vert(appdata_t v)
 		    {
-		        v2f o;
+		        v2f o = (v2f)0;
 		        float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
 		        float3 worldNormal = UnityObjectToWorldNormal(v.normal);
 		        float3 offset = normalize(worldNormal) * _OutlineWidth;
