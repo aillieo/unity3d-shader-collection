@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: OutliningScale
-  m_Shader: {fileID: 4800000, guid: 0e9f99a92dc8f481c84bfe9a9164e3bd, type: 3}
+  m_Name: OutliningImage
+  m_Shader: {fileID: 4800000, guid: 9352b886fe2814b7c89e445bd0473d41, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -66,7 +66,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 0.1
+    - _OutlineWidth: 1.31
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

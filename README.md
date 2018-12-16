@@ -1,3 +1,9 @@
+## 05_Outlining
+
+描边shader。前三个绘制描边都是基于模板缓冲区，立方体的shader使用对模型缩放的方法，两个猴子分别使用在世界空间和观察空间偏移顶点的方法，左下角的图片（sprite）使用像素偏移的方法。
+
+![outlines](GALLERY/05_Outlining/outlines.png)
+***
 ## 04_ModelAlphaBlend
 
 在模型中使用AlphaBlend，三个半透明的shader，从左到右依次是绘制双面、带深度绘制、使用Fresnel效果。
