@@ -29,8 +29,10 @@
 				o.pos = UnityObjectToClipPos(v.vertex);
 
 				// normal in view space
-				o.normalInView.x = mul(UNITY_MATRIX_IT_MV[0], v.normal);
-				o.normalInView.y = mul(UNITY_MATRIX_IT_MV[1], v.normal);
+				// o.normalInView.x = mul(UNITY_MATRIX_IT_MV[0], v.normal);
+				// o.normalInView.y = mul(UNITY_MATRIX_IT_MV[1], v.normal);
+				o.normalInView.x = dot(normalize(UNITY_MATRIX_IT_MV[0]), normalize(v.normal));
+				o.normalInView.y = dot(normalize(UNITY_MATRIX_IT_MV[1]), normalize(v.normal));
 				
 				// [-1,1]  to  [0,1]
 				o.normalInView = o.normalInView * 0.5 + 0.5;
