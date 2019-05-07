@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: SimpleLighting
   m_Shader: {fileID: 4800000, guid: 852278150ffa2d0468c52902b4320e42, type: 3}
-  m_ShaderKeywords: _LIGHTINGPERFRAG_ON _LIGHTING_PER_FRAG_ON
+  m_ShaderKeywords: _LIGHTINGPERFRAG_ON _LIGHTING_PER_FRAG_ON _SPECULAR_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -33,7 +33,7 @@ Material:
     - _EmissionIntensity: 0
     - _Gloss: 1
     - _Lighting_Per_Frag: 1
-    - _Specular: 0
+    - _Specular: 1
     m_Colors:
     - _AmbientColor: {r: 1, g: 1, b: 1, a: 1}
     - _DiffuseColor: {r: 1, g: 1, b: 1, a: 1}
