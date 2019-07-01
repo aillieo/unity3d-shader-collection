@@ -270,8 +270,8 @@ MonoBehaviour:
   propertyName: _Value
   min: 0
   max: 1
-  delta: 0.1
-  value: -22.5
+  delta: 0.02
+  value: 0
 --- !u!1 &1247834137
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,6 +30,6 @@ Material:
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
-    - _Value: 0.9000001
+    - _Value: 0.34999985
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
