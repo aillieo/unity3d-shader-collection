@@ -1,3 +1,9 @@
+## 12_UIHoles
+
+在UI图片上挖洞：
+
+![holes](GALLERY/12_UIHoles/holes.png)
+***
 ## 11_UIDissolveFade
 
 根据颜色对图片擦除，可用于图片的淡入和淡出：
